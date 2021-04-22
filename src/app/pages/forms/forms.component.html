@@ -1,0 +1,55 @@
+
+<div class="content">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h6 class="text-center">Opciones</h6>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <input class="form-control mt-1" type="text" [formControl]="filter" placeholder="Buscar encuesta"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table text-center" id="">
+                            <thead class="text-primary">
+                                <tr>
+                                    <th>Nombre</th>
+                                    <th>Fecha de creación</th>
+                                    <th>Ultima actualización</th>
+                                    <th>#</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let quiz of quizes$ | async; index as i">
+                                    <td>
+                                      <span>{{ quiz.nombre }}</span>
+                                    </td>
+                                    <td>
+                                        <span>{{ quiz.created }}</span>
+                                    </td>
+                                    <td>
+                                        <span>{{ quiz.updated }}</span>
+                                    </td>
+                                    <td>
+                                        <a [routerLink]="['/']">
+                                            <span class="tim-icons icon-alert-circle-exc text-info"></span>
+                                        </a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

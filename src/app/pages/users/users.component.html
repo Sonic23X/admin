@@ -1,0 +1,65 @@
+
+<div class="content">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h6 class="text-center">Opciones</h6>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <a [routerLink]="['/users/new']" class="btn btn-primary btn-block">Nuevo usuario</a>
+                        </div>
+                        <div class="col-md-6">
+                            <input class="form-control mt-1" type="text" [formControl]="filter" placeholder="Buscar usuario"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table text-center" id="">
+                            <thead class="text-primary">
+                                <tr>
+                                    <th>Nombre(s)</th>
+                                    <th>Apellido Paterno</th>
+                                    <th>Apellido Materno</th>
+                                    <th>Fecha de creación</th>
+                                    <th>#</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let user of users$ | async; index as i">
+                                    <td>
+                                      <span>{{ user.nombre }}</span>
+                                    </td>
+                                    <td>
+                                        <span>{{ user.aPaterno }}</span>
+                                    </td>
+                                    <td>
+                                        <span>{{ user.aMaterno }}</span>
+                                    </td>
+                                    <td>
+                                        <span>{{ user.created }}</span>
+                                    </td>
+                                    <td>
+                                        <a href="">
+                                            <span class="tim-icons icon-pencil text-info"></span>
+                                        </a>
+                                        <a href="" class="ml-1">
+                                            <span class="tim-icons icon-simple-remove text-danger"></span>
+                                        </a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,28 @@
+import { Routes } from "@angular/router";
+
+import { DashboardComponent } from "../../pages/dashboard/dashboard.component";
+import { IconsComponent } from "../../pages/icons/icons.component";
+import { NotificationsComponent } from "../../pages/notifications/notifications.component";
+//import { UserComponent } from "../../pages/user/user.component";
+//import { TablesComponent } from "../../pages/tables/tables.component";
+import { TypographyComponent } from "../../pages/typography/typography.component";
+import { ClientsComponent } from "../../pages/clients/clients.component";
+import { UsersComponent } from "../../pages/users/users.component";
+import { NewUserComponent } from "../../pages/new-user/new-user.component";
+import { FormsComponent } from "../../pages/forms/forms.component";
+import { ClientDetailsComponent } from "../../pages/client-details/client-details.component";
+
+export const AdminLayoutRoutes: Routes = [
+  { path: "dashboard", component: DashboardComponent },
+  { path: "icons", component: IconsComponent },
+  { path: "notifications", component: NotificationsComponent },
+  //{ path: "user", component: UserComponent },
+  //{ path: "tables", component: TablesComponent },
+  { path: "typography", component: TypographyComponent },
+  
+  { path: "clients", component: ClientsComponent },
+  { path: "clients/details", component: ClientDetailsComponent },
+  { path: "users", component: UsersComponent },
+  { path: "users/new", component: NewUserComponent },
+  { path: "forms", component: FormsComponent },
+];

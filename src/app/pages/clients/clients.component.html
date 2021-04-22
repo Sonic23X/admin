@@ -1,0 +1,79 @@
+
+<div class="content">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h6 class="text-center">Opciones</h6>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <input class="form-control mt-1" type="text" [formControl]="filter" placeholder="Buscar cliente"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table text-center" id="">
+                            <thead class="text-primary">
+                                <tr>
+                                    <th>Nombre(s)</th>
+                                    <th>Fecha de creación</th>
+                                    <th>Edad</th>
+                                    <th>Correo electrónico</th>
+                                    <th>Genero</th>
+                                    <th>Estado civil</th>
+                                    <th>País</th>
+                                    <th>Estado</th>
+                                    <th>Test realizados</th>
+                                    <th>#</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let client of clients$ | async; index as i">
+                                    <td>
+                                      <span>{{ client.nombre }}</span>
+                                    </td>
+                                    <td>
+                                        <span>{{ client.created }}</span>
+                                    </td>
+                                    <td>
+                                        <span>{{ client.edad }}</span>
+                                    </td>
+                                    <td>
+                                        <span>{{ client.correo }}</span>
+                                    </td>
+                                    <td>
+                                        <span>{{ client.genero }}</span>
+                                    </td>
+                                    <td>
+                                        <span>{{ client.estado_civil }}</span>
+                                    </td>
+                                    <td>
+                                        <span>{{ client.pais }}</span>
+                                    </td>
+                                    <td>
+                                        <span>{{ client.estado }}</span>
+                                    </td>
+                                    <td>
+                                        <span>{{ client.test }}</span>
+                                    </td>
+                                    <td>
+                                        <a [routerLink]="['/clients/details']">
+                                            <span class="tim-icons icon-alert-circle-exc text-info"></span>
+                                        </a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
