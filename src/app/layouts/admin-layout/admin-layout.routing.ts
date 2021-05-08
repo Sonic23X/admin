@@ -11,18 +11,19 @@ import { UsersComponent } from "../../pages/users/users.component";
 import { NewUserComponent } from "../../pages/new-user/new-user.component";
 import { FormsComponent } from "../../pages/forms/forms.component";
 import { ClientDetailsComponent } from "../../pages/client-details/client-details.component";
+import { AuthGuard } from "../../guards/auth.guard";
 
 export const AdminLayoutRoutes: Routes = [
-  { path: "dashboard", component: DashboardComponent },
-  { path: "icons", component: IconsComponent },
-  { path: "notifications", component: NotificationsComponent },
+  { path: "dashboard", component: DashboardComponent, canActivate: [AuthGuard] },
+  //{ path: "icons", component: IconsComponent },
+  //{ path: "notifications", component: NotificationsComponent },
   //{ path: "user", component: UserComponent },
   //{ path: "tables", component: TablesComponent },
-  { path: "typography", component: TypographyComponent },
+  //{ path: "typography", component: TypographyComponent },
   
-  { path: "clients", component: ClientsComponent },
-  { path: "clients/details", component: ClientDetailsComponent },
-  { path: "users", component: UsersComponent },
-  { path: "users/new", component: NewUserComponent },
-  { path: "forms", component: FormsComponent },
+  { path: "clients", component: ClientsComponent, canActivate: [AuthGuard] },
+  { path: "clients/details", component: ClientDetailsComponent, canActivate: [AuthGuard] },
+  { path: "users", component: UsersComponent, canActivate: [AuthGuard] },
+  { path: "users/new", component: NewUserComponent, canActivate: [AuthGuard] },
+  { path: "forms", component: FormsComponent, canActivate: [AuthGuard]},
 ];

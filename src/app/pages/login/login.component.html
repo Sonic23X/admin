@@ -1,0 +1,8 @@
+<div class="login">
+	<h1>Administrador</h1>
+    <form method="post">
+    	<input type="text" name="u" [(ngModel)]="user" placeholder="Usuario" required="required" />
+        <input type="password" [(ngModel)]="password" name="p" placeholder="Contraseña" required="required" />
+        <button type="button" class="btn btn-primary btn-block btn-large" (click)='login()'>Acceder</button>
+    </form>
+</div>

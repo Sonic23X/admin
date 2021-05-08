@@ -169,6 +169,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
       if (this.listTitles[item].path === titlee) {
         return this.listTitles[item].title;
       }
+      
     }
     return "Dashboard";
   }
