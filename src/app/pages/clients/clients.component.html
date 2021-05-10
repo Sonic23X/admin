@@ -8,8 +8,33 @@
                 </div>
                 <div class="card-body">
                     <div class="row">
-                        <div class="col-md-12">
+                        <div class="col-md-6">
                             <input class="form-control mt-1" type="text" [formControl]="filter" placeholder="Buscar cliente"/>
+                        </div>
+                        <div class="col-md-6">
+                            <select class="custom-select">
+                                <option value="0" class="text-dark">Buscar por encuesta</option>
+                                <option *ngFor="let quizz of quizes" value="{{ quizz.id }}" class="text-dark">{{ quizz.name }}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row mt-2 text-center">
+                        <div class="col-md-12">
+                            <h6>Buscar por fecha</h6>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="">Desde</label>
+                            <input class="form-control mt-1" type="date" [formControl]="filter" placeholder="Desde"/>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="">Hasta</label>
+                            <input class="form-control mt-1" type="date" [formControl]="filter" placeholder="Hasta"/>
+                        </div>
+                        <div class="col-md-6 mt-2">
+                            <input class="btn btn-primary btn-block" type="button"  value="Limpiar"/>
+                        </div>
+                        <div class="col-md-6 mt-2">
+                            <input class="btn btn-primary btn-block" type="button"  value="Buscar"/>
                         </div>
                     </div>
                 </div>
