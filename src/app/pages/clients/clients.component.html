@@ -9,10 +9,10 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-6">
-                            <input class="form-control mt-1" type="text" [formControl]="filter" placeholder="Buscar cliente"/>
+                            <input class="form-control mt-1" type="text" placeholder="Buscar cliente" [(ngModel)]="data"/>
                         </div>
                         <div class="col-md-6">
-                            <select class="custom-select">
+                            <select class="custom-select" [(ngModel)]="selectValue">
                                 <option value="0" class="text-dark">Buscar por encuesta</option>
                                 <option *ngFor="let quizz of quizes" value="{{ quizz.id }}" class="text-dark">{{ quizz.name }}</option>
                             </select>
@@ -24,17 +24,17 @@
                         </div>
                         <div class="col-md-6">
                             <label for="">Desde</label>
-                            <input class="form-control mt-1" type="date" [formControl]="filter" placeholder="Desde"/>
+                            <input class="form-control mt-1" type="date" [(ngModel)]="dateStart" placeholder="Desde"/>
                         </div>
                         <div class="col-md-6">
                             <label for="">Hasta</label>
-                            <input class="form-control mt-1" type="date" [formControl]="filter" placeholder="Hasta"/>
+                            <input class="form-control mt-1" type="date" [(ngModel)]="dateEnd" placeholder="Hasta"/>
                         </div>
                         <div class="col-md-6 mt-2">
-                            <input class="btn btn-primary btn-block" type="button"  value="Limpiar"/>
+                            <input class="btn btn-primary btn-block" type="button" value="Limpiar" (click)='clean()'/>
                         </div>
                         <div class="col-md-6 mt-2">
-                            <input class="btn btn-primary btn-block" type="button"  value="Buscar"/>
+                            <input class="btn btn-primary btn-block" type="button" value="Buscar" (click)='searchClients()'/>
                         </div>
                     </div>
                 </div>
@@ -89,7 +89,7 @@
                                         <span>{{ client.test }}</span>
                                     </td>
                                     <td>
-                                        <a [routerLink]="['/clients/details']">
+                                        <a [routerLink]="" (click)="seeDetails(client.nombre)">
                                             <span class="tim-icons icon-alert-circle-exc text-info"></span>
                                         </a>
                                     </td>

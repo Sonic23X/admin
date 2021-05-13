@@ -7,113 +7,123 @@
                     <h5 class=" title">Detalles del cliente</h5>
                 </div>
                 <div class="card-body">
-                    <form>
-                        <div class=" row">
-                            <div class=" col-md-4 pr-md-1">
-                                <div class=" form-group">
-                                    <label> Nombre </label>
-                                    <input
-                                        class=" form-control"
-                                        type="text"
-                                    />
-                                </div>
-                            </div>
-                            <div class=" col-md-4 px-md-1">
-                                <div class=" form-group">
-                                    <label> Fecha de creación del usuario </label>
-                                    <input
-                                        class=" form-control"
-                                        type="text"
-                                    />
-                                </div>
-                            </div>
-                            <div class=" col-md-4 pl-md-1">
-                                <div class=" form-group">
-                                    <label> Edad </label>
-                                    <input
-                                        class=" form-control"
-                                        type="number"
-                                    />
-                                </div>
+                    <div class=" row">
+                        <div class=" col-md-4 pr-md-1">
+                            <div class=" form-group">
+                                <label> Nombre </label>
+                                <input
+                                    class="form-control-plaintext text-light"
+                                    type="text"
+                                    [(ngModel)]="name"
+                                    disabled
+                                />
                             </div>
                         </div>
-                        <div class=" row">
-                            <div class=" col-md-4 pr-md-1">
-                                <div class=" form-group">
-                                    <label> Correo Electronico </label>
-                                    <input
-                                        class=" form-control"
-                                        placeholder="Correo electronico"
-                                        type="email"
-                                    />
-                                </div>
-                            </div>
-                            <div class=" col-md-4 px-md-1">
-                                <div class=" form-group">
-                                    <label> Genero </label>
-                                    <input
-                                        class=" form-control"
-                                        type="password"
-                                    />
-                                </div>
-                            </div>
-                            <div class=" col-md-4 pl-md-1">
-                                <div class=" form-group">
-                                    <label> Estado civil </label>
-                                    <input
-                                        class=" form-control"
-                                        type="password"
-                                    />
-                                </div>
+                        <div class=" col-md-4 px-md-1">
+                            <div class=" form-group">
+                                <label> Fecha de creación del usuario </label>
+                                <input
+                                    class="form-control-plaintext text-light"
+                                    type="text"
+                                    [(ngModel)]="dateCreated"
+                                    disabled
+                                />
                             </div>
                         </div>
-                        <div class=" row">
-                            <div class=" col-md-6 pr-md-1">
-                                <div class=" form-group">
-                                    <label> País </label>
-                                    <input
-                                        class=" form-control"
-                                        type="text"
-                                    />
-                                </div>
-                            </div>
-                            <div class=" col-md-6 px-md-1">
-                                <div class=" form-group">
-                                    <label> Estado </label>
-                                    <input
-                                        class=" form-control"
-                                        type="text"
-                                    />
-                                </div>
+                        <div class=" col-md-4 pl-md-1">
+                            <div class=" form-group">
+                                <label> Edad </label>
+                                <input
+                                    class="form-control-plaintext text-light"
+                                    type="number"
+                                    [(ngModel)]="age"
+                                    disabled
+                                />
                             </div>
                         </div>
-                        <div class="row mt-3">
-                            <div class=" col-md-2 pr-md-1"></div>
-                            <div class=" col-md-8 pr-md-1">
-                                <div class=" table-responsive">
-                                    <table class=" table tablesorter text-center">
-                                        <thead class="text-primary">
-                                            <tr>
-                                                <th>Quiz</th>
-                                                <th>Fecha de realización</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td></td>
-                                                <td></td>
-                                            </tr>
-                                            <tr>
-                                                <td></td>
-                                                <td></td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
+                    </div>
+                    <div class=" row">
+                        <div class=" col-md-4 pr-md-1">
+                            <div class=" form-group">
+                                <label> Correo Electronico </label>
+                                <input
+                                    class="form-control-plaintext text-light"
+                                    placeholder="Correo electronico"
+                                    type="email"
+                                    [(ngModel)]="email"
+                                    disabled
+                                />
                             </div>
-                            <div class=" col-md-2 pr-md-1"></div>
                         </div>
-                    </form>
+                        <div class=" col-md-4 px-md-1">
+                            <div class=" form-group">
+                                <label> Genero </label>
+                                <input
+                                    class="form-control-plaintext text-light"
+                                    type="text"
+                                    [(ngModel)]="gender"
+                                    disabled
+                                />
+                            </div>
+                        </div>
+                        <div class=" col-md-4 pl-md-1">
+                            <div class=" form-group">
+                                <label> Estado civil </label>
+                                <input
+                                    class="form-control-plaintext text-light"
+                                    type="text"
+                                    [(ngModel)]="status"
+                                    disabled
+                                />
+                            </div>
+                        </div>
+                    </div>
+                    <div class=" row">
+                        <div class=" col-md-6 pr-md-1">
+                            <div class=" form-group">
+                                <label> País </label>
+                                <input
+                                    [(ngModel)]="country"
+                                    class="form-control-plaintext text-light"
+                                    type="text"
+                                    disabled
+                                />
+                            </div>
+                        </div>
+                        <div class=" col-md-6 px-md-1">
+                            <div class=" form-group">
+                                <label> Estado </label>
+                                <input
+                                    class="form-control-plaintext text-light"
+                                    type="text"
+                                    [(ngModel)]="state"
+                                    disabled
+                                />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class=" col-md-2 pr-md-1"></div>
+                        <div class=" col-md-8 pr-md-1">
+                            <div class=" table-responsive">
+                                <table class=" table tablesorter text-center">
+                                    <thead class="text-primary">
+                                        <tr>
+                                            <th>Quiz</th>
+                                            <th>Fecha de realización</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let quizz of quizes index as i">
+                                            <td>{{ quizz.quiz }}</td>
+                                            <td>{{ quizz.created }}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class=" col-md-2 pr-md-1"></div>
+                    </div>
                 </div>
             </div>
         </div>

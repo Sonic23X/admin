@@ -19,8 +19,13 @@ import { QuizzService } from 'src/app/services/quizz.service';
 export class ClientsComponent implements OnInit 
 {
 
-  clients: Client[] =[ ];
+  clients: Client[] = [ ];
   quizes = [];
+
+  data: string = '';
+  dateStart: string = '';
+  dateEnd: string = '';
+  selectValue: any = 0;
 
   filter = new FormControl('');
   clients$: Observable<Client[]>;
@@ -35,20 +40,16 @@ export class ClientsComponent implements OnInit
   ) 
   { }
 
-  search(text: string, pipe: PipeTransform ): Client[] 
+  search(text: string): Client[] 
   {
     return this.clients.filter(client => 
     {
       const term = text.toLowerCase();
       return client.nombre.toLowerCase().includes(term)
           || client.created.toLowerCase().includes(term)
-          || pipe.transform(client.edad).includes(term)
           || client.correo.toLowerCase().includes(term)
           || client.genero.toLowerCase().includes(term)
           || client.estado_civil.toLowerCase().includes(term)
-          || client.pais.toLowerCase().includes(term)
-          || client.estado.toLowerCase().includes(term)
-          || pipe.transform(client.test).includes(term)
     });
   }
 
@@ -58,57 +59,89 @@ export class ClientsComponent implements OnInit
     this.getQuizz();
   }
 
-  getClients()
+  getClients(): void
   {
+    this.clients = [ ];
     this.clientService.getClients().subscribe(response => 
+    {
+      response.forEach(element => 
       {
-        console.log(response);
-        
-        response.forEach(element => 
-        {
-          this.clients.push(
-          { 
-            nombre: element.usuario,
-            created: element.createAt == null ? 'N/A': element.createAt,
-            edad: element.edad,
-            correo: element.email,
-            genero: element.genero,
-            estado_civil: element.estadoCivil,
-            pais: element.idPais,
-            estado: element.idEstado,
-            test: element.idQuizz == null ? 1 : element.idQuizz,
-          });
+        this.clients.push(
+        { 
+          nombre: element.usuario,
+          created: element.createAt == null ? 'N/A': element.createAt,
+          edad: element.edad,
+          correo: element.email,
+          genero: element.genero,
+          estado_civil: element.estadoCivil,
+          pais: element.idPais,
+          estado: element.idEstado,
+          test: element.idQuizz == null ? 1 : element.idQuizz,
         });
-  
-        let pipe: DecimalPipe;
-  
-        this.clients$ = this.filter.valueChanges.pipe
-        (
-          startWith(''),
-          map( text => this.search(text, pipe) )
-        );
-      }, err => 
-      {
-        switch (err.status) 
-        {
-          case 401:
-            this.alert('Tiempo de sesión expirado, inicie sesión de nuevo');
-            this.authService.setToken('');
-            this.route.navigate(['login']);
-            break;
-          default:
-            this.alert('Error en el Servidor, por favor intente más tarde');
-            break;
-        }
       });
+
+      this.clients$ = this.filter.valueChanges.pipe
+      (
+        startWith(''),
+        map( text => this.search(text) )
+      );
+    }, err => 
+    {
+      switch (err.status) 
+      {
+        case 401:
+          this.alert('Tiempo de sesión expirado, inicie sesión de nuevo');
+          this.authService.setToken('');
+          this.route.navigate(['login']);
+          break;
+        default:
+          this.alert('Error en el Servidor, por favor intente más tarde');
+          break;
+      }
+    });
   }
 
-  getQuizz()
+  getQuizz(): void
   {
     this.quizzService.getQuiz().subscribe( response => 
     {
       response.forEach(element => {
         this.quizes.push({ id: element.id, name: element.name });
+      });
+    });
+  }
+
+  searchClients() :void
+  {
+    this.clients = [ ];
+    this.clientService.searchClients
+    (
+      this.data,
+      this.dateStart,
+      this.dateEnd,
+      this.selectValue
+    ).subscribe(response => 
+    {
+      response.forEach(element => 
+      {
+        this.clients.push(
+        { 
+          nombre: element.usuario.usuario,
+          created: element.usuario.createAt == null ? 'N/A': element.usuario.createAt,
+          edad: element.usuario.edad,
+          correo: element.usuario.email,
+          genero: element.usuario.genero,
+          estado_civil: element.usuario.estadoCivil,
+          pais: element.usuario.idPais,
+          estado: element.usuario.idEstado,
+          test: element.usuario.idQuizz == null ? 1 : element.usuario.idQuizz,
+        });
+
+        this.clients$ = this.filter.valueChanges.pipe
+        (
+          startWith(''),
+          map( text => this.search(text) )
+        );
       });
     }, err => 
     {
@@ -124,6 +157,22 @@ export class ClientsComponent implements OnInit
           break;
       }
     });
+  }
+
+  clean(): void
+  {
+    this.data = '';
+    this.dateEnd = '';
+    this.dateStart = '';
+    this.selectValue = 0;
+
+    this.getClients();
+  }
+
+  seeDetails(usuario: String): void
+  {
+    this.clientService.setUserSaved(usuario);
+    this.route.navigate(['clients/details']);
   }
 
   alert( text: String ): void
