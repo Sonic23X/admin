@@ -6,21 +6,18 @@ import { UserService } from "../../services/user.service";
 import { AuthService } from "../../services/auth.service";
 
 @Component({
-  selector: 'app-new-user',
-  templateUrl: './new-user.component.html',
+  selector: 'app-user-update',
+  templateUrl: './user-update.component.html'
 })
-export class NewUserComponent implements OnInit 
+export class UserUpdateComponent implements OnInit 
 {
 
   name: String = '';
-  user: String = '';
   aPaterno: String = '';
   aMaterno: String = '';
   email: String = '';
   phone: String = '';
   age: String = '';
-  password: String = '';
-  rpassword: String = '';
 
   constructor
   (
@@ -28,31 +25,50 @@ export class NewUserComponent implements OnInit
     private authService: AuthService,
     private toastr: ToastrService,
     private route: Router,
-  ) { }
+  ) 
+  { }
 
-  ngOnInit(): void { }
-
-  newUser(): void
+  ngOnInit(): void 
   {
-    if(this.password != this.rpassword)
+    if (this.userService.getUserSaved() != null) 
     {
-      this.alert('Las contraseñas no coinciden');
-      return;
+      this.getUser();
     }
+    else
+      this.route.navigate(['users']);
+  }
 
-    this.userService.newUser
-    (
-      this.user,
-      this.name, 
-      this.email, 
-      this.phone, 
-      this.age, 
-      this.aPaterno, 
-      this.aMaterno, 
-      this.password
-    ).subscribe(response =>
+  getUser(): void
+  {
+    this.userService.getUsers(this.userService.getUserSaved()).subscribe(response =>
     {
-      this.alert('¡Usuario creado con exito!');
+      this.name = response.nombre;
+      this.aPaterno = response.apellidoPaterno;
+      this.aMaterno = response.apellidoMaterno;
+      this.email = response.email;
+      this.phone = response.telefono;
+      this.age = response.edad;
+    }, err =>
+    {
+      switch (err.status) 
+      {
+        case 401:
+          this.alert('Tiempo de sesión expirado, inicie sesión de nuevo');
+          this.authService.setToken('');
+          this.route.navigate(['login']);
+          break;
+        default:
+          this.alert('Error en el Servidor, por favor intente más tarde');
+          break;
+      }
+    });
+  }
+
+  updateUser(): void
+  {
+    this.userService.updateUser(this.name, this.email, this.phone, this.age, this.aPaterno, this.aMaterno).subscribe(response =>
+    {
+      this.alert('¡Usuario actualizado con exito!');
       this.route.navigate(['users']);
     }, err =>
     {

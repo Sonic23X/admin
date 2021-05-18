@@ -10,7 +10,24 @@ import { AuthService } from "../services/auth.service";
 export class UserService 
 {
 
-  private urlEndPoint: string = `${environment.apiUrl}psis/api/usuarios`;
+  userSaved: String = null;
+
+  getUserSaved(): String
+  {
+    return this.userSaved;
+  }
+
+  setUserSaved(email: String): void
+  {
+    this.userSaved = email;
+  }
+
+  dropUserSaved(): void
+  {
+    this.userSaved = null;
+  }
+
+  private urlEndPoint: string = `${environment.apiUrl}psic-admin/api/usuarios`;
   private httpHeaders = new HttpHeaders({'Content-Type': 'application/json'})
 
   constructor
@@ -28,11 +45,74 @@ export class UserService
     return this.httpHeaders;
   }
 
-  getUsers(): Observable<any>
+  getUsers(search: String): Observable<any>
   {
     return this.http.get
     (
-      `${this.urlEndPoint}`, 
+      `${this.urlEndPoint}/${search}`, 
+      {
+        headers: this.agregarAuthorizationHeader()
+      }
+    );
+  }
+
+  newUser
+  (
+    user: String,
+    name: String, 
+    email: String, 
+    phone: String,
+    age: String,
+    lastName1: String,
+    lastName2: String,
+    password: String,
+  ): Observable<any>
+  {
+    return this.http.post
+    (
+      `${environment.apiUrl}psic-admin/api/usuarios/crear`,
+      {
+        usuario: user,
+        email: email,
+        telefono: phone,
+        activo: true,
+        edad: age,
+        apellidoPaterno: lastName1,
+        apellidoMaterno: lastName2,
+        nombre: name,
+        password: password,
+        roles: ["ROLE_ADMIN", "ROLE_USER"]
+      },
+      {
+        headers: this.agregarAuthorizationHeader()
+      }
+    );
+  }
+
+  updateUser
+  (
+    name: String, 
+    email: String, 
+    phone: String,
+    age: String,
+    lastName1: String,
+    lastName2: String,
+  ): Observable<any>
+  {
+    return this.http.put
+    (
+      `${environment.apiUrl}psic-admin/api/usuarios/${this.getUserSaved()}`,
+      {
+        usuario: this.getUserSaved(),
+        email: email,
+        telefono: phone,
+        activo: true,
+        edad: age,
+        apellidoPaterno: lastName1,
+        apellidoMaterno: lastName2,
+        nombre: name,
+        roles: ["ROLE_ADMIN", "ROLE_USER"]
+      },
       {
         headers: this.agregarAuthorizationHeader()
       }

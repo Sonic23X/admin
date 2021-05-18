@@ -19,6 +19,7 @@ import { FormsComponent } from './pages/forms/forms.component';
 import { NewUserComponent } from './pages/new-user/new-user.component';
 import { ClientDetailsComponent } from './pages/client-details/client-details.component';
 import { LoginComponent } from './pages/login/login.component';
+import { UserUpdateComponent } from './pages/user-update/user-update.component';
 
 
 @NgModule({
@@ -33,7 +34,7 @@ import { LoginComponent } from './pages/login/login.component';
     AppRoutingModule,
     ToastrModule.forRoot(),
   ],
-  declarations: [AppComponent, AdminLayoutComponent, AuthLayoutComponent, ClientsComponent, UsersComponent, FormsComponent, NewUserComponent, ClientDetailsComponent, LoginComponent],
+  declarations: [AppComponent, AdminLayoutComponent, AuthLayoutComponent, ClientsComponent, UsersComponent, FormsComponent, NewUserComponent, ClientDetailsComponent, LoginComponent, UserUpdateComponent],
   providers: [],
   bootstrap: [AppComponent]
 })

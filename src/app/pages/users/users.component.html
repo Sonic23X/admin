@@ -8,11 +8,14 @@
                 </div>
                 <div class="card-body">
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-md-3">
                             <a [routerLink]="['/users/new']" class="btn btn-primary btn-block">Nuevo usuario</a>
                         </div>
                         <div class="col-md-6">
-                            <input class="form-control mt-1" type="text" [formControl]="filter" placeholder="Buscar usuario"/>
+                            <input class="form-control mt-1" type="text" placeholder="Buscar usuario" [(ngModel)]="data"/>
+                        </div>
+                        <div class="col-md-3">
+                            <input class="btn btn-primary btn-block" type="button" value="Buscar" (click)='searchUsers()'/>
                         </div>
                     </div>
                 </div>
@@ -47,8 +50,8 @@
                                         <span>{{ user.created }}</span>
                                     </td>
                                     <td>
-                                        <a href="">
-                                            <span class="tim-icons icon-pencil text-info"></span>
+                                        <a [routerLink]="" (click)="editUser(user.user)">
+                                            <span class="tim-icons icon-alert-circle-exc text-info"></span>
                                         </a>
                                         <a href="" class="ml-1">
                                             <span class="tim-icons icon-simple-remove text-danger"></span>

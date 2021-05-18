@@ -5,4 +5,5 @@ export interface User
     aPaterno: string;
     aMaterno: string;
     created: string;
+    user: string;
 }
