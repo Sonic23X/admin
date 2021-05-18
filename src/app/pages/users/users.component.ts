@@ -7,6 +7,7 @@ import { ToastrService } from 'ngx-toastr';
 
 import { User } from "../../interfaces/user";
 import { UserService } from "../../services/user.service";
+import { AuthService } from "../../services/auth.service";
 
 @Component({
   selector: 'app-users',
@@ -24,6 +25,7 @@ export class UsersComponent implements OnInit
   constructor
   (
     private userService: UserService,
+    private authService: AuthService,
     private toastr: ToastrService,
     private route: Router,
   ) 
@@ -47,6 +49,12 @@ export class UsersComponent implements OnInit
   {
     this.userService.getUsers(this.data).subscribe(response =>
     {
+      if (response == null) 
+      {
+        this.alert('No hay datos que mostrar');
+        return;
+      }
+      
       this.users.push
       (
         {
@@ -66,7 +74,17 @@ export class UsersComponent implements OnInit
       );
     }, err =>
     {
-      
+      switch (err.status) 
+      {
+        case 401:
+          this.alert('Tiempo de sesión expirado, inicie sesión de nuevo');
+          this.authService.setToken('');
+          this.route.navigate(['login']);
+          break;
+        default:
+          this.alert('Error en el Servidor, por favor intente más tarde');
+          break;
+      }
     });
   }
 
@@ -76,13 +94,50 @@ export class UsersComponent implements OnInit
     this.route.navigate(['users/update']);
   }
 
+  deleteUser(user: String): void
+  {
+    this.userService.deleteUser(user).subscribe(response =>
+    {      
+      this.users = [ ];
+      this.users$ = this.filter.valueChanges.pipe
+      (
+        startWith(''),
+        map( text => this.search(text) )
+      );
+
+      this.alert('¡Usuario eliminado con exito!');
+    }, err =>
+    {
+      switch (err.status) 
+      {
+        case 401:
+          this.alert('Tiempo de sesión expirado, inicie sesión de nuevo');
+          this.authService.setToken('');
+          this.route.navigate(['login']);
+          break;
+        case 200:
+          this.users = [ ];
+          this.users$ = this.filter.valueChanges.pipe
+          (
+            startWith(''),
+            map( text => this.search(text) )
+          );
+          this.alert('¡Usuario eliminado con exito!');
+          break;
+        default:
+          this.alert('Error en el Servidor, por favor intente más tarde');
+          break;
+      }
+    });
+  }
+
   alert( text: String ): void
   {
     this.toastr.info(
       `<span class="tim-icons icon-bell-55" [data-notify]="icon"></span> ${text}`, 
       '', 
       {
-        disableTimeOut: true,
+        timeOut: 2000,
         closeButton: true,
         enableHtml: true,
         toastClass: "alert alert-primary alert-with-icon",

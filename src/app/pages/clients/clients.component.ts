@@ -181,7 +181,7 @@ export class ClientsComponent implements OnInit
       `<span class="tim-icons icon-bell-55" [data-notify]="icon"></span> ${text}`, 
       '', 
       {
-        disableTimeOut: true,
+        timeOut: 2000,
         closeButton: true,
         enableHtml: true,
         toastClass: "alert alert-primary alert-with-icon",

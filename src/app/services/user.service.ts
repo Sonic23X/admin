@@ -119,11 +119,11 @@ export class UserService
     );
   }
 
-  deleteUser(): Observable<any>
+  deleteUser(user: String): Observable<any>
   {
     return this.http.delete
     (
-      `${this.urlEndPoint}`, 
+      `${environment.apiUrl}psic-admin/api/usuarios/${user}`, 
       {
         headers: this.agregarAuthorizationHeader()
       }
