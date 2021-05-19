@@ -36,11 +36,11 @@
               <img alt="Profile Photo" src="assets/img/anime3.png" />
             </div>
             <b class=" caret d-none d-lg-block d-xl-block"> </b>
-            <p class=" d-lg-none">Bienvenido, $user</p>
+            <p class=" d-lg-none">Bienvenido, {{ this.authService.getName() }}</p>
           </a>
           <ul class=" dropdown-navbar" ngbDropdownMenu>
             <li class=" nav-link">
-              <a class=" nav-item" href="javascript:void(0)" ngbDropdownItem>
+              <a class=" nav-item" [routerLink]="" (click)="logout()" ngbDropdownItem>
                 Salir
               </a>
             </li>

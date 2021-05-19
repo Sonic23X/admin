@@ -32,12 +32,16 @@ export class LoginComponent implements OnInit
 
     this.authService.login(this.user, this.password).subscribe( response => 
     {
+      this.authService.setName(this.user);
       this.authService.setToken(response.access_token);
       this.route.navigate(['/dashboard']);
     }, err =>
     {
       switch (err.status) 
       {
+        case 400:
+          this.alert('El usuario y/o contraseña no son válidos');
+          break;
         case 401:
           this.alert('El usuario y/o contraseña no son válidos');
           break;
