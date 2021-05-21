@@ -71,7 +71,7 @@ export class ClientService
         email: email,
         fechaInicio: dateStart,
         fechaFin: dateEnd,
-        idQuizz: quizz,
+        idQuiz: quizz,
       },
       {
         headers: this.agregarAuthorizationHeader()

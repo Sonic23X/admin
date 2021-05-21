@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: 'http://165.227.123.61:8090/',
+  apiUrl: 'https://servicios.psicoterapia11.com',
 };
