@@ -11,7 +11,7 @@ export class AuthService
   constructor(private http:HttpClient) { }
 
   private token: string;
-  private name: String;
+  private name: string;
 
   setToken(access_token: string):void 
   {
@@ -19,10 +19,10 @@ export class AuthService
     sessionStorage.setItem('token', this.token);
   }
 
-  setName(name: String):void 
+  setName(name: string):void 
   {
     this.name = name;
-    sessionStorage.setItem('name', this.token);
+    sessionStorage.setItem('name', name);
   }
 
   getToken(): string
@@ -37,13 +37,13 @@ export class AuthService
     return '';
   }
 
-  getName(): String
+  getName(): string
   {
     if(this.name != null)
       return this.name;
     else if(sessionStorage.getItem('name') != null)
     {
-      this.name = sessionStorage.getItem('name') as String;
+      this.name = sessionStorage.getItem('name') as string;
       return this.name;
     }
     return '';
