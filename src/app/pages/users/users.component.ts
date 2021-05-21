@@ -62,7 +62,7 @@ export class UsersComponent implements OnInit
           nombre: response.nombre,
           aPaterno: response.apellidoPaterno,
           aMaterno: response.apellidoMaterno,
-          created: 'N/A',
+          created: response.createAt == null ? 'N/A': response.createAt.split('T')[0],
           user: response.usuario,
         }
       );
