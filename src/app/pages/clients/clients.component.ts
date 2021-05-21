@@ -25,7 +25,7 @@ export class ClientsComponent implements OnInit
   data: string = '';
   dateStart: string = '';
   dateEnd: string = '';
-  selectValue: any = 0;
+  selectValue: any = '';
 
   filter = new FormControl('');
   clients$: Observable<Client[]>;
