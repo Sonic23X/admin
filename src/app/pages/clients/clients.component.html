@@ -13,7 +13,7 @@
                         </div>
                         <div class="col-md-6">
                             <select class="custom-select" [(ngModel)]="selectValue">
-                                <option value="0" class="text-dark">Buscar por encuesta</option>
+                                <option value="" class="text-dark">Buscar por encuesta</option>
                                 <option *ngFor="let quizz of quizes" value="{{ quizz.id }}" class="text-dark">{{ quizz.name }}</option>
                             </select>
                         </div>
