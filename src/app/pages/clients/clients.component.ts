@@ -137,7 +137,7 @@ export class ClientsComponent implements OnInit
         this.clients.push(
         { 
           nombre: element.usuario.usuario,
-          created: element.usuario.createAt == null ? 'N/A': element.usuario.createAt,
+          created: element.usuario.createAt == null ? 'N/A': element.usuario.createAt.split('T')[0],
           edad: element.usuario.edad,
           correo: element.usuario.email,
           genero: element.usuario.genero,
