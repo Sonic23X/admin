@@ -69,8 +69,8 @@ export class ClientService
       `${this.urlEndPoint}/obtenerUsuariosByParams`, 
       {
         email: email,
-        fechaInicio: dateStart,
-        fechaFin: dateEnd,
+        fechaInicial: dateStart,
+        fechaFinal: dateEnd,
         idQuiz: quizz,
       },
       {
