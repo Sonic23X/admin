@@ -113,12 +113,16 @@ export class ClientsComponent implements OnInit
 
   searchClients() :void
   {
+
+    let fechaI = this.dateStart.split('-');
+    let fechaF = this.dateEnd.split('-');   
+
     this.clients = [ ];
     this.clientService.searchClients
     (
       this.data,
-      this.dateStart,
-      this.dateEnd,
+      fechaI[2] + '/' + fechaI[1] + '/' + fechaI[0],
+      fechaF[2] + '/' + fechaF[1] + '/' + fechaF[0],
       this.selectValue
     ).subscribe(response => 
     {
